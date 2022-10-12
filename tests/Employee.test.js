@@ -27,6 +27,6 @@ describe('Input control for Employees', () => {
     });
     it ('getRole() should return a given employees role, in this case employee', () => {
         const employee = new Employee ("Frank", "25", "nope@gmail.com");
-        expect(employee.getRole()).toBe(employee.role);
+        expect(employee.getRole()).toBe("Employee");
     });
 });
