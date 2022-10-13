@@ -1,15 +1,15 @@
-// Add the required files
+// Initalize the required files
 const fs = require('fs');
 const inquirer = require('inquirer');
 const genHTML = require('./src/generateHTML');
-const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
+// Declare a trio of arrays for each of the classes to be used.
 const manager = [];
 const engineers = [];
 const interns = [];
-// Inquirer woo
+// Arrays of inquirer questions
 const Questions = [
     {
         type: 'input',
@@ -32,6 +32,7 @@ const Questions = [
         name: 'officeNumber',
     },
 ];
+// The recursive list
 const menuQuestion = [
     {
         type: 'list',
@@ -40,7 +41,7 @@ const menuQuestion = [
         name: 'role',
     },
 ];
-
+// Single question objects to be popped and pushed
 const engineerQuestion = 
     {
         type: 'input',
@@ -56,14 +57,13 @@ const internQuestion =
         name: 'school',
     };
 
-// Reference to the src file for making the html
+// Function to create the index file and pass it data.
 function writeToFile(fileName, manager, engineers, interns){
     fs.writeFile(fileName, genHTML(manager, engineers, interns), (err) =>
     err ? console.log(err) : console.log('Team list page created successfully!'));  
 }
-// Push the three different employee types to their own arrays
 
-//Initialize
+//Initialize, gets the data of the manager, runs the engineer/intern loop
 function init(){
     const loop = true;
     inquirer
@@ -74,7 +74,7 @@ function init(){
         });
     
 }
-
+// The loop to fill up the arrays for engineers and interns until the user concludes their team building
 function fillroster(){
     inquirer
         .prompt(menuQuestion)
@@ -104,5 +104,5 @@ function fillroster(){
 
     
 
-
+// To start it all
 init();
